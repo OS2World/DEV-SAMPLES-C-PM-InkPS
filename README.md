@@ -18,4 +18,4 @@ AUTHORS
 
 LINKS
 ===============
-* [https://github.com/OS2World/DEV-SAMPLES-The-IBM-Developer-Connection-Release-12](https://github.com/OS2World/DEV-SAMPLES-IBM_Dev_Toolkit_Samples)
+* https://github.com/OS2World/DEV-SAMPLES-The-IBM-Developer-Connection-Release-2--Volume-2_CD4
