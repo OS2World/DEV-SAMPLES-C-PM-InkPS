@@ -1,3 +1,7 @@
+/*----------------------------------
+   INKPS.RC resource script file
+  ----------------------------------*/
+
 #define INCL_PM
 #include <os2.h>
 
@@ -191,5 +195,3 @@ BEGIN
         MENUITEM    "Lock Desktop",             MI_LOCK
     END
 END
-
-

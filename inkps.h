@@ -1,3 +1,7 @@
+/*------------------------
+   INKPS.H header file
+  ------------------------*/
+
 #define  MENU_ID          150
 #define  WND_ID           140
 #define  MI_OPT           300
@@ -181,6 +185,3 @@ MRESULT EXPENTRY  ClientWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2);
 
 #define PPS_DESKTOP  1 
 #define PPS_WINDOW   2
-
-
-

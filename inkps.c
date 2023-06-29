@@ -1,3 +1,12 @@
+//---------------------------------------------------------------------------
+//
+//  Name     : inkps.c
+//
+//  Purpose  : New InkPS Demo.
+//
+//
+//---------------------------------------------------------------------------
+
 #define INCL_WIN
 #define INCL_GPI
 #define INCL_GRE_PALETTE
@@ -95,13 +104,13 @@ int main( VOID )
    }
 
    success = WinRegisterClass( hab,
-                               ClientClass,
+                               (PCSZ) ClientClass,
                                (PFNWP)ClientWndProc,
                                CS_SIZEREDRAW | CS_MOVENOTIFY,
                                0 );
    if (!success)
    {
-     DisplayMessage("Could Not Register Class");
+     DisplayMessage( (PCH) "Could Not Register Class");
      WinDestroyMsgQueue( hmq );
      WinTerminate( hab );
      exit(RETURN_ERROR);
@@ -110,15 +119,15 @@ int main( VOID )
    hwndFrame = WinCreateStdWindow(  HWND_DESKTOP,
                                     WS_VISIBLE,
                                     &FrameFlags,
-                                    ClientClass,
-                                    "New InkPS Demo",
+                                    (PCSZ) ClientClass,
+                                    (PCSZ) "New InkPS Demo",
                                     WS_VISIBLE,
                                     0,
                                     WND_ID,
                                     &hwndClient );
    if (!hwndFrame)
    {
-     DisplayMessage("Could Not Create Main Window");
+     DisplayMessage( (PCH) "Could Not Create Main Window");
      WinDestroyMsgQueue( hmq );
      WinTerminate( hab );
      exit(RETURN_ERROR);
@@ -177,7 +186,7 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
          {
              if ( !fInPath )
                 {
-                   LONG lBeginOption = 0L;
+                   // LONG lBeginOption = 0L;
                    SIZEL sizl ;
                    sizl.cx = sizl.cy = 0 ;
 
@@ -189,8 +198,7 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
                       if (hdcPenDeskTop == (HDC) 0L )
                       {
         
-                         hdcPenDeskTop =  DevOpenDC (hab, OD_SCREEN, "*", 
-                                                     0, 0, 0) ;
+                         hdcPenDeskTop =  DevOpenDC (hab, OD_SCREEN, (PCSZ) "*", 0, 0, 0) ;
                       }
 
                       if (hpsPen)
@@ -233,7 +241,7 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 
              fButton1 = TRUE;
 
-             newptlCur.x = (LONG) (SHORT) mp1;
+             newptlCur.x = (SHORT) (LONG) mp1;
 
              newptlCur.y = (LONG) (SHORT) ((LONG) mp1 >> 16);
 
@@ -281,7 +289,7 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
       case WM_MOUSEMOVE:
          if ( fButton1 && fInPath )
          {
-             newptlCur.x = (LONG) (SHORT) mp1;
+             newptlCur.x = (SHORT) (LONG) mp1;
 
              newptlCur.y = (LONG) (SHORT) ((LONG) mp1 >> 16);
 
@@ -366,14 +374,14 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 
          GpiQueryFontMetrics( hps, sizeof(FONTMETRICS), &FontMetrics );
 
-         GpiQueryTextBox( hps, strlen(newstr), newstr, TXTBOX_COUNT, txtbox );
+         GpiQueryTextBox( hps, strlen(newstr), (PCH) newstr, TXTBOX_COUNT, txtbox );
          rect.xLeft = ulLeft + ( ulWidth - ( txtbox[TXTBOX_BOTTOMRIGHT].x - txtbox[TXTBOX_BOTTOMLEFT].x ) ) / 2;
          rect.xRight = rect.xLeft + ( txtbox[TXTBOX_BOTTOMRIGHT].x - txtbox[TXTBOX_BOTTOMLEFT].x );
          rect.yTop = cyClient * 9 / 10;
          rect.yBottom = rect.yTop - ( txtbox[TXTBOX_TOPLEFT].y - txtbox[TXTBOX_BOTTOMLEFT].y );
          ptl[0].x = rect.xLeft;
          ptl[0].y = rect.yBottom + FontMetrics.lMaxDescender;
-         GpiCharStringPosAt( hps, ptl, &rect, CHS_OPAQUE | CHS_CLIP, strlen(newstr), newstr, 0 );
+         GpiCharStringPosAt( hps, ptl, &rect, CHS_OPAQUE | CHS_CLIP, strlen(newstr), (PCCH) newstr, 0 );
 
          WinEndPaint( hps );
          return FALSE;
@@ -580,4 +588,3 @@ VOID DisplayMessage(PCH str)
      (PCH) "Pen Demo Error", 0,
      MB_OK | MB_APPLMODAL | MB_MOVEABLE | MB_ERROR);
 }
-

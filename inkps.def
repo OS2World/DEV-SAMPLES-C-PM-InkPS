@@ -1,18 +1,18 @@
-NAME    INKPS  WINDOWAPI
-DESCRIPTION 'New InkPS Demo'
+;-------------------------------------
+; INKPS.DEF module definition file
+;-------------------------------------
 
-PROTMODE
+NAME    	INKPS  	WINDOWAPI
+DESCRIPTION	'@#OS2World:1.01#@##1## 29 Jun 2023 20:00:00     ARCAOS-507::::::v1.01@@New InkPS Demo'
 
 CODE            MOVEABLE
 DATA            MOVEABLE
 
 HEAPSIZE        30000
-STACKSIZE       10000
+
 
 IMPORTS
 
     GpiBeginInkPath   = PMGPI.670
     GpiEndInkPath     = PMGPI.671
     GpiStrokeInkPath  = PMGPI.672
-
-
